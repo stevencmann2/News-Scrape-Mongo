@@ -5,9 +5,6 @@ const router = express.Router();
 
 
 
-
-
-
 // Homepage
 router.get('/', function (req, res, next) {
 
@@ -16,6 +13,19 @@ router.get('/', function (req, res, next) {
 
     });
 });
+
+// Saved Articles
+router.get('/saved', function (req, res, next) {
+
+    res.render('saved', {
+        title: 'Your Saved Articles',
+    });
+});
+
+
+
+
+
 
 
 
