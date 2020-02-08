@@ -1,31 +1,37 @@
 body {
-    background-color:#03c2fc;
+    background-color: #03c2fc;
 }
 
-.btn-danger:hover{
-    background-color:#43cc7a !important;
+.btn-danger:hover {
+    background-color: #43cc7a !important;
 }
 
-#logo{
+#logo {
     font-family: 'Lobster', cursive;
     text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000;
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 
+}
+
+.shadow-buttons{
+    box-shadow: 0 8px 6px -6px black;
 }
 
 .jumbotron-fluid {
     width: 100%;
-    height: 500px;;
+    height: 500px;
+    ;
     background-image: url("../images/reverb.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     box-shadow: 1px 1px;
     opacity: 0.9;
-    z-index:-1;
-    
+    z-index: -1;
+    box-shadow: 0 8px 6px -6px black;
+
 
 }
 
@@ -35,10 +41,10 @@ body {
     font-family: 'Lobster', cursive;
     color: white;
     text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000;
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 
 .hText {
@@ -50,13 +56,37 @@ body {
 }
 
 
-#footerLogo{
+#footerLogo {
     font-family: 'Lobster', cursive;
     color: white;
     text-decoration: none;
 }
 
-#profileLink{
+#profileLink {
     color: white;
     text-decoration: none;
 }
+
+.noArticles {
+    background-color: #ebbe0c;
+    color: black;
+    box-shadow: 0 8px 6px -6px black;
+
+}
+
+.articleCard{
+
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.card-header {
+    background-color: #ebbe0c;
+    color: white;
+   
+}
+
+#scrapedTitle {
+    font-size: 1.3em;
+}
+
+
