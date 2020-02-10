@@ -4,12 +4,12 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const exphbs = require("express-handlebars");
 const path = require('path');
-
+var logger = require("morgan");
 
 var PORT = process.env.PORT || 3000;
 var app = express();
 // mongoHeadlines is the database name 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/reverbMongoDb";
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,7 +36,7 @@ const router = require('./controller/newsScrapeController.js')
 app.use(router);
 
 app.listen(3000, function () {
-    console.log (' App listening  and running on Port 30000')
+    console.log (' App listening  and running on Port 3000')
 });
 
 

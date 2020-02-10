@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+var logger = require("morgan");
 // const db = require('../models')
 
 
@@ -19,26 +19,44 @@ console.log("\n***********************************\n" +
 
 
 
-axios.get("https://reverb.com/").then(function(response) {
+axios.get("https://www.rollingstone.com/music/music-news/").then(function(response) {
   // Load the HTML into cheerio and save it to a variable
   // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
-  const $ = cheerio.load(response.data);
- 
-  let results = [];
+  var $ = cheerio.load(response.data);
 
-  $("li.tiles__tile").each(function(i, element) {
+  // An empty array to save the data that we'll scrape
+  var results = [];
+
+  // Select each element in the HTML body from which you want information.
+  // NOTE: Cheerio selectors function similarly to jQuery's selectors,
+  // but be sure to visit the package's npm page to see how it works
+  $("li.l-river__item").each(function(i, element) {
     
-    // console.log(element)
-    let title = $(element).children().text();
-    let link = $(element).find("a").attr("href");
+    console.log(element)
+    
+    const articleContent = $(element).children();
+    const aElement = articleContent.children();
+    const title = aElement.find('header').find('h3').text();
+    const blurb = aElement.find('header').find('p').text()
+
+
+
+       const link = articleContent.find('a').attr('href')
+
+    // const GridCard = gridCard.find('a').attr('href');
+    // const link = $(element).attr("href");
 
     
+
+
+    // Save these results in an object that we'll push into the results array we defined earlier
     results.push({
       title: title,
-      link: link
+      blurb: blurb
     });
   });
 
+  // Log the results once you've looped through each of the elements found with cheerio
   console.log(results);
 });
 
@@ -76,7 +94,10 @@ router.get('/saved', function (req, res, next) {
 });
 
 
-
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+///////////////////       MONGOOSE  ROUTING      /////////////
+//////////////////////////////////////////////////////////////
 
 
 
