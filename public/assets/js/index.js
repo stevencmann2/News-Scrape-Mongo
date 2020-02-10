@@ -2,16 +2,20 @@
 
 $(document).ready(function () {
     console.log('hello')
+    //// GRABS ID FROM DATA
+    var thisId = $(this).attr("data-id");
+
+
     $.getJSON("/articles", function (data) {
-        if(data.length == 0){
+        if (data.length == 0) {
             displayNoDataCard()
             return;
-        }else{
+        } else {
             $(".index-body").append(`<div class="mt-5 mb-5 Lobster text-center">
             <h1 style="font-size: 4em">Top Stories</h1>
             <div>`)
-            for(i=0; i < data.length; i++){
-               $('.index-body').append(`
+            for (i = 0; i < data.length; i++) {
+                $('.index-body').append(`
                 
 
                 <div class="card articleCard mt-4 mb-4" >
@@ -19,7 +23,7 @@ $(document).ready(function () {
   <h5>
         <a class="text-wrap text-break" id="scrapedTitle">${data[i].title}</a>
         
-        <a class="btn btn-success float-right shadow-buttons">Save Article</a>
+        <a class="btn btn-success float-right shadow-buttons saveArticle" data-id="${data[i]._id}">Save Article</a>
         
         </h5>
       
@@ -34,7 +38,7 @@ $(document).ready(function () {
 </div>
 
                `)
-                
+
             }
         }
     });
@@ -53,6 +57,9 @@ $(document).ready(function () {
         window.location.href = "/scrape"
     })
 
+    $(".saveArticle").on("click", function scrapeArticles(event) {
+        event.preventDefault();
+    })
 
 
 
@@ -69,4 +76,3 @@ $(document).ready(function () {
 
 
 });
-

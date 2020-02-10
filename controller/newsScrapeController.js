@@ -108,6 +108,8 @@ router.get("/articles", function(req, res) {
 });
 
 
+
+
 // Route for grabbing a specific Article by id, populate it with it's note
 router.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
@@ -143,6 +145,7 @@ router.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
 
 
 module.exports = router;
