@@ -1,47 +1,49 @@
 ////// INDEX JS JAVASCRIPT FOR HOMEPAGE
-
-$(document).ready(function () {
-    console.log('hello')
-    //// GRABS ID FROM DATA
-    var thisId = $(this).attr("data-id");
-
-
-    $.getJSON("/articles", function (data) {
-        if (data.length == 0) {
-            displayNoDataCard()
-            return;
-        } else {
-            $(".index-body").append(`<div class="mt-5 mb-5 Lobster text-center">
-            <h1 style="font-size: 4em">Top Stories</h1>
-            <div>`)
-            for (i = 0; i < data.length; i++) {
-                $('.index-body').append(`
-                
-
-                <div class="card articleCard mt-4 mb-4" >
-    <div class="card-header">
-  <h5>
-        <a class="text-wrap text-break" id="scrapedTitle">${data[i].title}</a>
+ 
+$.getJSON("/articles", function (data) {
+    if (data.length == 0) {
+        displayNoDataCard()
+        return;
+    } else {
+        $(".index-body").append(`<div class="mt-5 mb-5 Lobster text-center">
+    <h1 style="font-size: 4em">Top Stories</h1>
+    <div>`)
+        for (i = 0; i < data.length; i++) {
+            $('.index-body').append(`
         
-        <a class="btn btn-success float-right shadow-buttons saveArticle" data-id="${data[i]._id}">Save Article</a>
-        
-        </h5>
-      
-    </div>
-  <div class="card-body">
-    <h5 class="card-title">${data[i].title}</h5>
-    <p class="card-text">${data[i].blurb}</p>
-    <a class="card-text mr-2" href="${data[i].articleURL}"> View Article</a>
-    <a class="card-text ml-2" href="${data[i].image}"> View Photo</a>
 
-  </div>
+        <div class="card articleCard mt-4 mb-4" >
+<div class="card-header">
+<h5>
+<a class="text-wrap text-break" id="scrapedTitle">${data[i].title}</a>
+
+<a class="btn btn-success float-right shadow-buttons saveArticle" data-id="${data[i]._id}">Save Article</a>
+
+</h5>
+
+</div>
+<div class="card-body">
+<h5 class="card-title">${data[i].title}</h5>
+<p class="card-text">${data[i].blurb}</p>
+<a class="card-text mr-2" href="${data[i].articleURL}"> View Article</a>
+<a class="card-text ml-2" href="${data[i].image}"> View Photo</a>
+
+</div>
 </div>
 
-               `)
+       `)
 
-            }
         }
-    });
+    }
+});
+
+
+    console.log('hello')
+    //// GRABS ID FROM DATA
+    let thisId = $(this).attr("data-id");
+
+
+   
 
     function displayNoDataCard() {
         $(".index-body").prepend(`
@@ -57,8 +59,11 @@ $(document).ready(function () {
         window.location.href = "/scrape"
     })
 
-    $(".saveArticle").on("click", function scrapeArticles(event) {
+    $(".saveArticle").on("click", function saveOneArticle(event) {
+        console.log('clicked the button')
         event.preventDefault();
+        let thisId = $(this).attr("data-id");
+        console.log(thisId)
     })
 
 
@@ -75,4 +80,3 @@ $(document).ready(function () {
 
 
 
-});
