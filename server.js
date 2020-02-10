@@ -9,7 +9,7 @@ var logger = require("morgan");
 var PORT = process.env.PORT || 3000;
 var app = express();
 // mongoHeadlines is the database name 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/reverbMongoDb";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/rollingStoneMongoDb";
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
