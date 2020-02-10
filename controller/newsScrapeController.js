@@ -38,6 +38,8 @@ axios.get("https://www.rollingstone.com/music/music-news/").then(function(respon
     const aElement = articleContent.children();
     const title = aElement.find('header').find('h3').text();
     const blurb = aElement.find('header').find('p').text()
+    const image = aElement.find('figure').find('img').attr('data-src');
+    const articleURL = aElement.attr('href') 
 
 
 
@@ -52,7 +54,9 @@ axios.get("https://www.rollingstone.com/music/music-news/").then(function(respon
     // Save these results in an object that we'll push into the results array we defined earlier
     results.push({
       title: title,
-      blurb: blurb
+      blurb: blurb,
+      articleURL: articleURL,
+      image: image
     });
   });
 
