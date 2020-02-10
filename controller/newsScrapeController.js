@@ -147,5 +147,41 @@ router.post("/articles/:id", function(req, res) {
 });
 
 
+//ROUTE FOR ALL SAVED ARTICLES
+router.get("/articles/saved", function(req, res) {
+  // TODO: Finish the route so it grabs all of the articles
+  db.Article.find({isSaved: true})
+  .then(function(dbArticle) {
+    // If all Notes are successfully found, send them back to the client
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error back to the client
+    res.json(err);
+  });
+
+});
+
+//ROUTE FOR  CLEARING SAVED
+router.delete("/articles", function(req, res) {
+  db.Article.deleteMany({})
+  .then(function(dbArticle) {
+    // If all Notes are successfully found, send them back to the client
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error back to the client
+    res.json(err);
+  });
+
+});
+
+
+
+
+
+
+
+
 
 module.exports = router;
