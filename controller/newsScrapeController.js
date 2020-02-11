@@ -123,8 +123,23 @@ router.get("/articles/saved", function(req, res) {
 });
 
 //////// ROUTE FOR SAVING ARTICLES
-router.put("/articles/:id", function (req, res){
+router.put("/articles/save/:id", function (req, res){
   db.Article.findOneAndUpdate({_id: req.params.id}, {$set: {isSaved: true}})
+  .then(function(dbArticle) {
+    // If all Notes are successfully found, send them back to the client
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error back to the client
+    res.json(err);
+  });
+
+
+})
+
+/////// ROUTE FOR SAVING ARTICLES
+router.put("/articles/unsave/:id", function (req, res){
+  db.Article.findOneAndUpdate({_id: req.params.id}, {$set: {isSaved: false}})
   .then(function(dbArticle) {
     // If all Notes are successfully found, send them back to the client
     res.json(dbArticle);

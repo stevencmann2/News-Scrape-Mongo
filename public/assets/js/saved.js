@@ -1,7 +1,10 @@
+$(document).ready(showSavedArticles());
+
+function showSavedArticles(){
 $.getJSON("/articles/saved", function (data) {
+    $(".saved-body").empty();
     if (data.length == 0) {
-        displayNoSavedArticlesCard()
-        return;
+        displayNoSavedArticlesCard();
     } else {
         console.log("WE GOT SAVED ARTICLES")
         for (i = 0; i < data.length; i++) {
@@ -12,8 +15,8 @@ $.getJSON("/articles/saved", function (data) {
             <a class="text-wrap text-break" id="scrapedTitle">${data[i].title}</a>
 
         
-            <button class="btn btn-danger float-right shadow-buttons ml-2" data-id="${data[i]._id}">Delete From Saved</button>
-            <button class="btn btn-primary float-right shadow-buttons">Article Notes</button>
+            <button class="btn btn-danger float-right shadow-buttons ml-2" id="unsave" data-id="${data[i]._id}">Delete From Saved</button>
+            <button class="btn btn-primary float-right shadow-buttons" id="articleButton">Article Notes</button>
            
 
             </h5>
@@ -31,6 +34,7 @@ $.getJSON("/articles/saved", function (data) {
         }
     }
 });
+}
 
 function displayNoSavedArticlesCard(){
  $(".saved-body").prepend( `  
@@ -41,11 +45,6 @@ function displayNoSavedArticlesCard(){
     </div>
  `)
 }
-
-
-
-
-
 
 /////// SCRAPE BUTTON
 $("#scrapeArticlesButton").on("click", function scrapeArticles(event) {
@@ -63,7 +62,25 @@ $("#clearArticlesButton").on("click", function clearArticles(event) {
         method: "DELETE",
         url: "/articles"
     }).then(
-        window.location.reload()
+        showSavedArticles()
     )
     
 })
+
+$(".saved-body").on("click", "#unsave", function unsArticle(event) {
+    console.log('clicked the button')
+    event.preventDefault();
+    let thisId = $(this).attr("data-id");
+    console.log(thisId)
+
+
+    $.ajax({
+        method: "PUT",
+        url: `/articles/unsave/${thisId}`
+    }).then(
+        
+        showSavedArticles()
+    )
+
+})
+

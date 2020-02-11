@@ -3,6 +3,7 @@ $(document).ready(scrapeArticles());
 
 function scrapeArticles () {
 $.getJSON("/articles", function (data) {
+    $(".index-body").empty();
     if (data.length == 0) {
         displayNoDataCard()
         return;
@@ -61,9 +62,9 @@ $(".index-body").on("click", "button", function saveOneArticle(event) {
 
     $.ajax({
         method: "PUT",
-        url: `/articles/${thisId}`
+        url: `/articles/save/${thisId}`
     }).then(
-        window.location.reload()
+        scrapeArticles()
     )
 
 })
@@ -71,7 +72,7 @@ $(".index-body").on("click", "button", function saveOneArticle(event) {
 ///// CLEAR ARTICLES
 $("#clearArticlesButton").on("click", function clearArticles(event) {
     event.preventDefault();
-    $(".index-body").empty();
+    
     $.ajax({
         method: "DELETE",
         url: "/articles"
