@@ -91,7 +91,7 @@ $(".saved-body").on("click", "#articleButton", function NotesModal(){
     $("#modalTitle").text(`${thisId}`)
 
 
-console.log(thisId)
+
 $.ajax({
     method: "GET",
     url: `/articles/${thisId}`,
@@ -143,14 +143,12 @@ $.ajax({
       window.location.href="/saved"
       
     });
-console.log('addind data')
+
 })
 
 $(document).on("click", ".deleteNote", function eraseNote(){
     event.preventDefault();
     const buttonId = $(this).attr("data-id")
-    console.log("delete button clicked")
-    console.log(buttonId)
     $.ajax({
         method: "DELETE",
         url: `/note/${buttonId}`,
