@@ -95,7 +95,7 @@ router.get('/scrape', function (req, res) {
 // Route for getting all Articles from the db
 router.get("/articles", function(req, res) {
   // TODO: Finish the route so it grabs all of the articles
-  db.Article.find({})
+  db.Article.find({isSaved: false})
   .then(function(dbArticle) {
     // If all Notes are successfully found, send them back to the client
     res.json(dbArticle);
@@ -107,7 +107,35 @@ router.get("/articles", function(req, res) {
 
 });
 
+//ROUTE FOR ALL SAVED ARTICLES
+router.get("/articles/saved", function(req, res) {
+  // TODO: Finish the route so it grabs all of the articles
+  db.Article.find({isSaved: true})
+  .then(function(dbArticle) {
+    // If all Notes are successfully found, send them back to the client
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error back to the client
+    res.json(err);
+  });
 
+});
+
+//////// ROUTE FOR SAVING ARTICLES
+router.put("/articles/:id", function (req, res){
+  db.Article.findOneAndUpdate({_id: req.params.id}, {$set: {isSaved: true}})
+  .then(function(dbArticle) {
+    // If all Notes are successfully found, send them back to the client
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error back to the client
+    res.json(err);
+  });
+
+
+})
 
 
 // Route for grabbing a specific Article by id, populate it with it's note
@@ -147,20 +175,7 @@ router.post("/articles/:id", function(req, res) {
 });
 
 
-//ROUTE FOR ALL SAVED ARTICLES
-router.get("/articles/saved", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
-  db.Article.find({isSaved: true})
-  .then(function(dbArticle) {
-    // If all Notes are successfully found, send them back to the client
-    res.json(dbArticle);
-  })
-  .catch(function(err) {
-    // If an error occurs, send the error back to the client
-    res.json(err);
-  });
 
-});
 
 //ROUTE FOR  CLEARING SAVED
 router.delete("/articles", function(req, res) {
@@ -175,12 +190,6 @@ router.delete("/articles", function(req, res) {
   });
 
 });
-
-
-
-
-
-
 
 
 

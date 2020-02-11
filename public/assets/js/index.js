@@ -1,10 +1,13 @@
 ////// INDEX JS JAVASCRIPT FOR HOMEPAGE
+$(document).ready(scrapeArticles());
 
+function scrapeArticles () {
 $.getJSON("/articles", function (data) {
     if (data.length == 0) {
         displayNoDataCard()
         return;
     } else {
+        $(".index-body").empty();
         $(".index-body").append(`<div class="mt-5 mb-5 Lobster text-center">
         <h1 style="font-size: 4em">Top Stories</h1>
         <div>`)
@@ -32,12 +35,13 @@ $.getJSON("/articles", function (data) {
         }
     }
 });
+}
 ///// DISPLAYS CARD IF NO DATA
 function displayNoDataCard() {
     $(".index-body").prepend(`
             <div class="container mt-5 mb-5 text-center">
             <div class="alert alert-warning p-3 noArticles" role="alert">
-            You don't appear to have any scraped articles yet! Click <a href="/scrape" class="alert-link">here</a> to add articles
+            You don't appear to have any scraped articles! Click <a href="/scrape" class="alert-link">here</a> to add articles
             or click <a href="/saved" class="alert-link">here</a> to visit your saved articles
             </div></div> `)
 }
@@ -53,6 +57,15 @@ $(".index-body").on("click", "button", function saveOneArticle(event) {
     event.preventDefault();
     let thisId = $(this).attr("data-id");
     console.log(thisId)
+
+
+    $.ajax({
+        method: "PUT",
+        url: `/articles/${thisId}`
+    }).then(
+        window.location.reload()
+    )
+
 })
 
 ///// CLEAR ARTICLES
@@ -63,7 +76,7 @@ $("#clearArticlesButton").on("click", function clearArticles(event) {
         method: "DELETE",
         url: "/articles"
     }).then(
-        window.location.reload()
+        scrapeArticles()
     )
     
 })
