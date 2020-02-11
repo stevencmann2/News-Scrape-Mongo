@@ -94,34 +94,38 @@ $(".saved-body").on("click", "#articleButton", function NotesModal(){
 console.log(thisId)
 $.ajax({
     method: "GET",
-    url: "/articles/" + thisId,
+    url: `/articles/${thisId}`,
   })
     // With that done
     .then(function(data) {
-        console.log(data)
-        if(data.length > 0){
-        for (i=0; i < data.length; i++){
-        $(".modal-body").prepend(`
-        <ul id="prevNotes">
-        <li>${data[i].title}
-        <button class="btn btn-danger note-delete">
-        </button>
-        </li>
-        </ul>`
-     )
-    }
-   }
+        console.log(data.note)
+        $("#savedNotes").empty()
+        if(data){
+            console.log(data)
+            $("#savedNotes").append(`
+            <li class="text-center mr-5 mb-2">
+            <h6>
+            ${data.note.title}
+            </h6>
+            <p>
+            ${data.note.body}
+            </p>
+            <button type="button" class="btn btn-danger deleteNote" data-id="${data.note._id}">
+            Delete Note
+            </button>
+            </li>
+            `)   
+       
+}
 })
     
 });
 
 $("#noteToDb").on("click", function saveNotetoArticle(){
     let thisId = $("#modalTitle").text();
-    console.log(thisId + "from modal title")
-    console.log("Article Id for note add" + thisId )
 
-const noteBox= $("#noteBox").val().trim();
-const noteTitle=$("#noteTitle").val().trim();
+    const noteBox= $("#noteBox").val().trim();
+    const noteTitle=$("#noteTitle").val().trim();
 
 
 
@@ -142,6 +146,19 @@ $.ajax({
 console.log('addind data')
 })
 
+$(document).on("click", ".deleteNote", function eraseNote(){
+    event.preventDefault();
+    const buttonId = $(this).attr("data-id")
+    console.log("delete button clicked")
+    console.log(buttonId)
+    $.ajax({
+        method: "DELETE",
+        url: `/note/${buttonId}`,
+      }).then(
+        window.location.href = "/saved"
+      )
+
+})
 
 
 

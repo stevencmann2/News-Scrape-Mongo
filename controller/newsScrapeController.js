@@ -206,6 +206,19 @@ router.delete("/articles", function(req, res) {
 
 });
 
+router.delete("/note/:id", function(req, res) {
+  db.Note.deleteOne({ _id: req.params.id })
+  .then(function(dbNote) {
+    // If all Notes are successfully found, send them back to the client
+    res.json(dbNote);
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error back to the client
+    res.json(err);
+  });
+
+});
+
 
 
 module.exports = router;

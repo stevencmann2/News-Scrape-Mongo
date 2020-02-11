@@ -43,7 +43,8 @@ app.listen(3000, function () {
 //ask about URL parser?????????
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
 
 //once is a listener
