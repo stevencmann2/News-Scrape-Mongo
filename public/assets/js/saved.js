@@ -85,7 +85,6 @@ $(".saved-body").on("click", "#unsave", function unsaveArticle(event) {
 
 $(".saved-body").on("click", "#articleButton", function NotesModal(){
     event.preventDefault();
-    // $("#addNotesModal").modal('show')
     let thisId = $(this).attr("data-id");
     $("#addNotesModal").modal('show');
     $("#modalTitle").text(`${thisId}`)
@@ -96,7 +95,7 @@ $.ajax({
     method: "GET",
     url: `/articles/${thisId}`,
   })
-    // With that done
+    
     .then(function(data) {
         console.log(data.note)
         $("#savedNotes").empty()
@@ -137,9 +136,9 @@ $.ajax({
       body: noteBox,
     }
   })
-    // With that done
+  
     .then(function(data) {
-      // Log the response
+      
       window.location.href="/saved"
       
     });

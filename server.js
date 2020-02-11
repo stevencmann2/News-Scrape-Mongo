@@ -21,7 +21,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, '/public')));
 
 
-// Sets up the Express app to handle data parsing
+
 app.use(express.urlencoded({
     extended: true
 }));
@@ -39,16 +39,15 @@ app.listen(3000, function () {
     console.log (' App listening  and running on Port 3000')
 });
 
+mongoose.set('useFindAndModify', false)
 
-//ask about URL parser?????????
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 });
 
-//once is a listener
-//on is a listener
+
 mongoose.connection
     .once('open', () => console.log('MongoDB is Connected in server.js'))
     .on('error', (error) => {
