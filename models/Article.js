@@ -9,7 +9,8 @@ const ArticleSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   // `link` is required and of type String
   blurb: {
@@ -18,7 +19,8 @@ const ArticleSchema = new Schema({
   },
   articleURL: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   image: {
     type: String,

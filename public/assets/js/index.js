@@ -29,7 +29,7 @@ $.getJSON("/articles", function (data) {
                     <h5 class="card-title">${data[i].title}</h5>
                     <p class="card-text">${data[i].blurb}</p>
                     <a class="card-text mr-2" href="${data[i].articleURL}"> View Article</a>
-                    <a class="card-text ml-2" href="${data[i].image}"> View Photo</a>
+                    <a class="card-text ml-2" href="${data[i].image}" id="imgLink"> View Photo</a>
                     </div>
                     </div>
        `)
@@ -81,3 +81,9 @@ $("#clearArticlesButton").on("click", function clearArticles(event) {
     )
     
 })
+
+// $(document).on("click", "#imgLink", function imageModal(){
+//     event.preventDefault();
+//     $("#test").modal('show');
+
+// })

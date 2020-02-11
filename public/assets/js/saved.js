@@ -17,7 +17,6 @@ $.getJSON("/articles/saved", function (data) {
         
             <button class="btn btn-danger float-right shadow-buttons ml-2" id="unsave" data-id="${data[i]._id}">Delete From Saved</button>
             <button class="btn btn-primary float-right shadow-buttons" id="articleButton">Article Notes</button>
-           
 
             </h5>
 
@@ -73,14 +72,33 @@ $(".saved-body").on("click", "#unsave", function unsArticle(event) {
     let thisId = $(this).attr("data-id");
     console.log(thisId)
 
-
     $.ajax({
         method: "PUT",
         url: `/articles/unsave/${thisId}`
     }).then(
-        
-        showSavedArticles()
+             showSavedArticles()
     )
-
 })
+
+
+$(".saved-body").on("click", "#articleButton", function NotesModal(){
+    event.preventDefault();
+    console.log('please launch')
+    $("addNotesModal").modal('show')
+    
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
