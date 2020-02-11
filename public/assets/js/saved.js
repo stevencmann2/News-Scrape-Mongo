@@ -81,13 +81,13 @@ $(".saved-body").on("click", "#unsave", function unsArticle(event) {
 })
 
 
+
 $(".saved-body").on("click", "#articleButton", function NotesModal(){
     event.preventDefault();
     console.log('please launch')
-    $("addNotesModal").modal('show')
+    $("#addNotesModal").modal('show')
     
-
-
+    
 });
 
 
