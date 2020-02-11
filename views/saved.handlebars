@@ -25,21 +25,24 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="addNotesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addNotesModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="modalTitle">PLACE THE ARTICLE HERE </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+          <small id="emailHelp" class="form-text text-muted">Note Title</small>
+          <input id="noteTitle" size="51" name="note_title"><br>
+        <textarea id="noteBox" rows="5" cols="50"></textarea>
+        <small id="emailHelp" class="form-text text-muted">Add your notes in the box above.</small>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-success" id="noteToDb">Add Notes</button>
       </div>
     </div>
   </div>

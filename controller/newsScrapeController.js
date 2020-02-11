@@ -137,7 +137,7 @@ router.put("/articles/save/:id", function (req, res){
 
 })
 
-/////// ROUTE FOR SAVING ARTICLES
+/////// ROUTE FOR UNSAVING ARTICLES
 router.put("/articles/unsave/:id", function (req, res){
   db.Article.findOneAndUpdate({_id: req.params.id}, {$set: {isSaved: false}})
   .then(function(dbArticle) {

@@ -6,7 +6,7 @@ $.getJSON("/articles/saved", function (data) {
     if (data.length == 0) {
         displayNoSavedArticlesCard();
     } else {
-        console.log("WE GOT SAVED ARTICLES")
+        
         for (i = 0; i < data.length; i++) {
             $(".saved-body").append(`
             <div class="card articleCard mt-4 mb-4" >
@@ -16,7 +16,7 @@ $.getJSON("/articles/saved", function (data) {
 
         
             <button class="btn btn-danger float-right shadow-buttons ml-2" id="unsave" data-id="${data[i]._id}">Delete From Saved</button>
-            <button class="btn btn-primary float-right shadow-buttons" id="articleButton">Article Notes</button>
+            <button class="btn btn-primary float-right shadow-buttons" id="articleButton" data-id="${data[i]._id}">Article Notes</button>
 
             </h5>
 
@@ -66,11 +66,11 @@ $("#clearArticlesButton").on("click", function clearArticles(event) {
     
 })
 
-$(".saved-body").on("click", "#unsave", function unsArticle(event) {
-    console.log('clicked the button')
+$(".saved-body").on("click", "#unsave", function unsaveArticle(event) {
+    
     event.preventDefault();
     let thisId = $(this).attr("data-id");
-    console.log(thisId)
+    
 
     $.ajax({
         method: "PUT",
@@ -82,13 +82,65 @@ $(".saved-body").on("click", "#unsave", function unsArticle(event) {
 
 
 
+
 $(".saved-body").on("click", "#articleButton", function NotesModal(){
     event.preventDefault();
-    console.log('please launch')
-    $("#addNotesModal").modal('show')
-    
+    // $("#addNotesModal").modal('show')
+    let thisId = $(this).attr("data-id");
+    $("#addNotesModal").modal('show');
+    $("#modalTitle").text(`${thisId}`)
+
+
+console.log(thisId)
+$.ajax({
+    method: "GET",
+    url: "/articles/" + thisId,
+  })
+    // With that done
+    .then(function(data) {
+        console.log(data)
+        if(data.length > 0){
+        for (i=0; i < data.length; i++){
+        $(".modal-body").prepend(`
+        <ul id="prevNotes">
+        <li>${data[i].title}
+        <button class="btn btn-danger note-delete">
+        </button>
+        </li>
+        </ul>`
+     )
+    }
+   }
+})
     
 });
+
+$("#noteToDb").on("click", function saveNotetoArticle(){
+    let thisId = $("#modalTitle").text();
+    console.log(thisId + "from modal title")
+    console.log("Article Id for note add" + thisId )
+
+const noteBox= $("#noteBox").val().trim();
+const noteTitle=$("#noteTitle").val().trim();
+
+
+
+$.ajax({
+    method: "POST",
+    url: `/articles/${thisId}`,
+    data: {
+      title: noteTitle,
+      body: noteBox,
+    }
+  })
+    // With that done
+    .then(function(data) {
+      // Log the response
+      window.location.href="/saved"
+      
+    });
+console.log('addind data')
+})
 
 
 

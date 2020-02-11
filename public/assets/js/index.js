@@ -54,10 +54,10 @@ $("#scrapeArticlesButton").on("click", function scrapeArticles(event) {
 })
 /////// SAVES ARTICLES
 $(".index-body").on("click", "button", function saveOneArticle(event) {
-    console.log('clicked the button')
+    
     event.preventDefault();
     let thisId = $(this).attr("data-id");
-    console.log(thisId)
+    
 
 
     $.ajax({
