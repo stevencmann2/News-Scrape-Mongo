@@ -35,8 +35,8 @@ app.use(express.json());
 const router = require('./controller/newsScrapeController.js')
 app.use(router);
 
-app.listen(3000, function () {
-    console.log (' App listening  and running on Port 3000')
+app.listen(PORT, function () {
+    console.log (' App listening  and running on ' + PORT)
 });
 
 mongoose.set('useFindAndModify', false)
