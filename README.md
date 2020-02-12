@@ -37,7 +37,7 @@ https://quiet-escarpment-46032.herokuapp.com/
 
 ## Authors
 
-* **Steven Mann** - *Initial work* - [Github Profile](https://github.com/stevencmann2)
+* **Steven Mann** - [Github Profile](https://github.com/stevencmann2)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
