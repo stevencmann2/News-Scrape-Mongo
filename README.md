@@ -6,6 +6,9 @@ A web app that lets users view and leave comments on the latest Rolling Stones a
 
 There are no prerequisites for this application. Click the deployed Heroku link below to begin using the app.  
 
+## Visual Guide 
+
+![A gif of the News Scraper App](./public/assets/images/scrapeGif.gif)
 
 ### Installing
 
