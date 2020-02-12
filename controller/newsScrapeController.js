@@ -11,14 +11,12 @@ var indexJs = ('/assets/js/index.js');
 var savedJs = ('/assets/js/saved.js');
 
 
-///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-///////////////////        ROUTING      //////////////////////
-//////////////////////////////////////////////////////////////
+///////////////////      BASIC  ROUTING      ////////////////
 //////////////////////////////////////////////////////////////
 
-// Homepage
+
+
 router.get('/', function (req, res, next) {
 
   res.render('index', {
@@ -28,7 +26,7 @@ router.get('/', function (req, res, next) {
   });
 });
 
-// Saved Articles
+
 router.get('/saved', function (req, res, next) {
 
   res.render('saved', {
@@ -38,7 +36,7 @@ router.get('/saved', function (req, res, next) {
 });
 
 
-//////////////////////////////////////////////////////////////
+
 //////////////////////////////////////////////////////////////
 ///////////////////       MONGOOSE  ROUTING      /////////////
 //////////////////////////////////////////////////////////////
@@ -92,7 +90,7 @@ router.get('/scrape', function (req, res) {
   });
 });
 
-// Route for getting all Articles from the db
+
 router.get("/articles", function (req, res) {
 
   db.Article.find({
@@ -109,7 +107,7 @@ router.get("/articles", function (req, res) {
 
 });
 
-//ROUTE FOR ALL SAVED ARTICLES
+
 router.get("/articles/saved", function (req, res) {
 
   db.Article.find({
@@ -126,7 +124,7 @@ router.get("/articles/saved", function (req, res) {
 
 });
 
-//////// ROUTE FOR SAVING ARTICLES
+
 router.put("/articles/save/:id", function (req, res) {
   db.Article.findOneAndUpdate({
       _id: req.params.id
@@ -147,7 +145,7 @@ router.put("/articles/save/:id", function (req, res) {
 
 })
 
-/////// ROUTE FOR UNSAVING ARTICLES
+
 router.put("/articles/unsave/:id", function (req, res) {
   db.Article.findOneAndUpdate({
       _id: req.params.id
@@ -169,7 +167,7 @@ router.put("/articles/unsave/:id", function (req, res) {
 })
 
 
-// Route for grabbing a specific Article by id, populate it with it's note
+
 router.get("/articles/:id", function (req, res) {
 
   db.Article.findOne({
@@ -187,9 +185,9 @@ router.get("/articles/:id", function (req, res) {
     });
 });
 
-// Route for saving/updating an Article's associated Note
+
 router.post("/articles/:id", function (req, res) {
-  // Create a new note and pass the req.body to the entry
+  
   db.Note.create(req.body)
     .then(function (dbNote) {
 
@@ -212,9 +210,6 @@ router.post("/articles/:id", function (req, res) {
 });
 
 
-
-
-//ROUTE FOR  CLEARING SAVED
 router.delete("/articles", function (req, res) {
   db.Article.deleteMany({})
     .then(function (dbArticle) {

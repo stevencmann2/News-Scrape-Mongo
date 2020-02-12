@@ -39,7 +39,7 @@ $.getJSON("/articles", function (data) {
     }
 });
 }
-///// DISPLAYS CARD IF NO DATA
+
 function displayNoDataCard() {
     $(".index-body").prepend(`
             <div class="container mt-5 mb-5 text-center">
@@ -49,12 +49,12 @@ function displayNoDataCard() {
             </div></div> `)
 }
 
-/////// SCRAPE BUTTON
+
 $("#scrapeArticlesButton").on("click", function scrapeArticles(event) {
     event.preventDefault();
     window.location.href = "/scrape"
 })
-/////// SAVES ARTICLES
+
 $(".index-body").on("click", "button", function saveOneArticle(event) {
     
     event.preventDefault();
@@ -71,7 +71,7 @@ $(".index-body").on("click", "button", function saveOneArticle(event) {
 
 })
 
-///// CLEAR ARTICLES
+
 $("#clearArticlesButton").on("click", function clearArticles(event) {
     event.preventDefault();
     
