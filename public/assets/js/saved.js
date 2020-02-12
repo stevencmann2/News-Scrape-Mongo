@@ -100,21 +100,22 @@ $.ajax({
         console.log(data.note)
         $("#savedNotes").empty()
         if(data){
-            console.log(data)
+            for (i=0; i< data.note.length; i++){
+            
             $("#savedNotes").append(`
             <li class="text-center mr-5 mb-2">
             <h6>
-            ${data.note.title}
+            ${data.note[i].title}
             </h6>
             <p>
-            ${data.note.body}
+            ${data.note[i].body}
             </p>
-            <button type="button" class="btn btn-danger deleteNote" data-id="${data.note._id}">
+            <button type="button" class="btn btn-danger deleteNote" data-id="${data.note[i]._id}">
             Delete Note
             </button>
             </li>
             `)   
-       
+            }
 }
 })
     
