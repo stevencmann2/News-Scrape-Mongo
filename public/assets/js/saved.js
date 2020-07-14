@@ -45,7 +45,7 @@ function displayNoSavedArticlesCard(){
  `)
 }
 
-/////// SCRAPE BUTTON
+
 $("#scrapeArticlesButton").on("click", function scrapeArticles(event) {
     event.preventDefault();
     
@@ -53,7 +53,7 @@ $("#scrapeArticlesButton").on("click", function scrapeArticles(event) {
     
 })
 
-///// CLEAR ARTICLES
+
 $("#clearArticlesButton").on("click", function clearArticles(event) {
     event.preventDefault();
     $(".index-body").empty();
